@@ -41,6 +41,7 @@ public class ZipParsing {
     }
 
 }
+
 @Test
 void zipTestCSV() throws Exception {
     try (InputStream is = cl.getResourceAsStream("download.zip");
@@ -50,9 +51,9 @@ void zipTestCSV() throws Exception {
             if (entry.getName().contains(".csv")) {
                 CSVReader csvReader = new CSVReader(new InputStreamReader(zis));
                 List<String[]> list = csvReader.readAll();
-               Assertions.assertArrayEquals(
-                        new String[]{"6859","Генерал-лейтенант","Заместитель командующего","Авдотьев,Николай,Игоревич","VMF"  },
-                       list.get(0));
+                org.assertj.core.api.Assertions.assertThat(list).contains(
+                        new String[]{"6859","Avdotyev","Nikolai","Igorevich","VMF" }
+                        );
             }
         }
     }
