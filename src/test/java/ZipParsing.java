@@ -6,6 +6,7 @@ import model.GeneralInformation;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
@@ -26,6 +27,9 @@ public class ZipParsing {
                     String value = xlsx.excel.getSheetAt(0).getRow(1).getCell(3).getStringCellValue();
                     Assertions.assertTrue(value.contains("Лекция"));
                 }
+                else {
+                    System.out.println("Возникла ошибка. Проверьте корректность архива");
+                }
             }
         }
     }
@@ -39,6 +43,9 @@ public class ZipParsing {
                 if (entry.getName().contains(".pdf")) {
                     PDF pdf = new PDF(zis);
                     Assertions.assertEquals(pdf.numberOfPages, 2);
+                }
+                else {
+                    System.out.println("Возникла ошибка. Проверьте корректность архива");
                 }
 
             }
@@ -58,6 +65,9 @@ public class ZipParsing {
                     org.assertj.core.api.Assertions.assertThat(list).contains(
                             new String[]{"6859", "Avdotyev", "Nikolai", "Igorevich", "VMF"}
                     );
+                }
+                else {
+                    System.out.println("Возникла ошибка. Проверьте корректность архива");
                 }
             }
         }
